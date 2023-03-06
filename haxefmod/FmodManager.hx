@@ -321,4 +321,8 @@ class FmodManager {
     public static function RegisterEventListener(eventListener:FmodEventListener) {
         FmodManagerPrivate.GetInstance().RegisterEventListener(eventListener);
     }
+
+    public static function ResumeAudio() {
+        FmodManagerPrivate.GetInstance().ResumeAudio();
+    }
 }

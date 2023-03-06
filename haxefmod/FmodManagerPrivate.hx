@@ -283,4 +283,9 @@ class FmodManagerPrivate {
     private function RegisterEventListener(newEventListener:FmodEventListener) {
         eventListeners.push(newEventListener);
     }
+
+    //// Misc
+    private function ResumeAudio() {
+        HaxeFmod.resumeAudio(true);
+    }
 }

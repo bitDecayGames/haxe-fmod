@@ -105,5 +105,9 @@ extern class HaxeFmod {
 
     public static function fmod_set_callback_tracking_for_event_instance(eventInstanceName:String):Void;
     public static function fmod_check_callbacks_for_event_instance(eventInstanceName:String, callbackEventMask:UInt):Bool; 
+
+    //// Misc
+
+    public static function resumeAudio(force:Bool):Void;
 }
 #end

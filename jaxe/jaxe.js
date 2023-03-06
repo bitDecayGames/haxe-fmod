@@ -401,21 +401,20 @@ class jaxe {
 		result = jaxe.gSystemCore.setSoftwareFormat(outval.val, jaxe.FMOD.SPEAKERMODE_DEFAULT, 0)
 		jaxe.CHECK_RESULT(result);
 	
-		function resumeAudio() 
-		{
-			if (!jaxe.gAudioResumed)
-			{
-				console.log("Resetting audio driver based on user input.");
-	
-				result = jaxe.gSystemCore.mixerSuspend();
-				jaxe.CHECK_RESULT(result);
-				result = jaxe.gSystemCore.mixerResume();
-				jaxe.CHECK_RESULT(result);
-	
-				jaxe.gAudioResumed = true;
+		// 'click' for desktop
+		document.addEventListener('click', function () {
+			if (!jaxe.gAudioResumed) {
+				console.log("resuming audio in response to click event");
 			}
+			jaxe.resumeAudio(false);
+		});
+		// 'touchstart' for mobile
+		document.addEventListener('touchstart', function () {
+			if (!jaxe.gAudioResumed) {
+				console.log("resuming audio in response to touchstart event");
 		}
-		document.addEventListener('click', resumeAudio);
+			jaxe.resumeAudio(false);
+		});
 
 		console.log("initialize FMOD\n");
 	
@@ -442,6 +441,24 @@ class jaxe {
 		jaxe.FmodIsInitialized = true;
 	
 		return jaxe.FMOD.OK;
+	}
+
+	static resumeAudio(force)
+	{
+		if (force || !jaxe.gAudioResumed)
+		{
+			console.log("Resetting audio driver based on user input.");
+			if (force) {
+				console.log("forcefully");
+			}
+			var result;
+			result = jaxe.gSystemCore.mixerSuspend();
+			jaxe.CHECK_RESULT(result);
+			result = jaxe.gSystemCore.mixerResume();
+			jaxe.CHECK_RESULT(result);
+
+			jaxe.gAudioResumed = true;
+		}
 	}
 
 	// Needs to be a local function to play nicely with setInterval

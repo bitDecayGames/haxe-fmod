@@ -8,7 +8,7 @@ typedef FmodSettings = {
 class Settings {
     public static function LoadDefaultFmodSettings():FmodSettings {
         return {
-          SuppressDebugMessages : false,
+          SuppressDebugMessages : true,
         };
     }
 }
